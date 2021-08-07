@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <title>Text Analyzer</title>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="/">Text Analyzer</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/about">About Us</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container">
+
+  <form action='/analyze' onsubmit="return validate()" method='post'> {% csrf_token %}
+  <div class="form-group">
+    <h3><span id="typed"></span></h3>
+    <textarea class="form-control" name='text' id="exampleFormControlTextarea1" rows="9"></textarea>
+	<!-- Word Counter -->
+	<p>
+	<span id="wordCount">0</span> Characters
+	<script type="text/javascript">
+		var exampleFormControlTextarea1 = document.getElementById("exampleFormControlTextarea1");
+		var wordCount = document.getElementById("wordCount");
+
+		exampleFormControlTextarea1.addEventListener("keyup",function(){
+		var characters = exampleFormControlTextarea1.value.split('');
+  		wordCount.innerText = characters.length;
+		});
+	</script>
+	</p>
+  </div>
+
+<div class="custom-control custom-switch">
+  <input type="checkbox" name="rmvpunc" class="custom-control-input" id="customSwitch1">
+  <label class="custom-control-label" for="customSwitch1">Remove Punctuations</label>
+</div>
+
+  <div class="custom-control custom-switch">
+  <input type="checkbox" name="capltr" class="custom-control-input" id="customSwitch2">
+  <label class="custom-control-label" for="customSwitch2">Capitalize</label>
+</div>
+
+  <div class="custom-control custom-switch">
+  <input type="checkbox"  name="nlrmv" class="custom-control-input" id="customSwitch3">
+  <label class="custom-control-label" for="customSwitch3">New Line Remover</label>
+</div>
+
+  <div class="custom-control custom-switch">
+  <input type="checkbox"  name="exspcrmv" class="custom-control-input" id="customSwitch4">
+  <label class="custom-control-label" for="customSwitch4">Extra Spaces Remover</label>
+</div>
+
+<div class="custom-control custom-switch">
+    <input type="checkbox"  name="numrmv" class="custom-control-input" id="customSwitch5">
+    <label class="custom-control-label" for="customSwitch5">Number Remover</label>
+  </div>
+
+<button type="submit" class="btn btn-dark mt-2">Analyze Text</button>
+    </form>
+
+
+
+</body>
+</html>
